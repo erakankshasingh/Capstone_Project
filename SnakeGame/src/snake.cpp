@@ -50,7 +50,19 @@ void Snake::Update() {
 }
 
 void Snake::UpdateHead() {
-  bool redirected = false;
+    Coordinate New_Coordinate = growHead(head_x, head_y);
+      
+    head_x = static_cast<float> (New_Coordinate.a);
+    head_y = static_cast<float> (New_Coordinate.b);
+    
+    auto result_fmod_x = fmod(head_x + grid_width, grid_width);
+    auto result_fmod_y = fmod(head_y + grid_height, grid_height);
+      
+    head_x = result_fmod_x;
+    head_y = result_fmod_y;
+  
+
+  /*bool redirected = false;
   Coordinate next_head = growHead(head_x, head_y);
   int x = static_cast<int>(head_x);
   int y = static_cast<int>(head_y);
@@ -103,7 +115,7 @@ void Snake::UpdateHead() {
       next_head = growHead( head_x , head_y );
    
   head_x = next_head.a;
-  head_y = next_head.b;
+  head_y = next_head.b;*/
 }
 
 void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
